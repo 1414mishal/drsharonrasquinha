@@ -462,6 +462,9 @@
   .spec-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
   }
+  @media (min-width: 1025px) {
+    .spec-grid > .spec-card:last-child { grid-column: 2 / 3; }
+  }
   .spec-card {
     background: var(--surface-lowest); padding: 32px 28px;
     border-radius: var(--radius-lg);
@@ -883,7 +886,7 @@
   <div class="section-inner">
     <div class="about-grid">
       <div class="about-visual reveal">
-        <img src="WhatsApp%20Image%202026-04-14%20at%2010.45.10%20AM.jpeg" alt="Dr. Sharon Rasquinha Clinic, Mangaluru">
+        <img src="WhatsApp%20Image%202026-04-14%20at%2010.45.11%20AM.jpeg" alt="Dr. Sharon Rasquinha with newborn in delivery room, Mangaluru">
         <div class="about-badge">Mangaluru<small>Karnataka</small></div>
       </div>
       <div class="about-text">
