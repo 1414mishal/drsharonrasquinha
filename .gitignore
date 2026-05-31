@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+node_modules/
+.vercel
+.env
+.env.local
+*.log
+.idea/
+.vscode/
+
+# Design reference (not deployed)
+stitch_serene_women_s_care_platform/
+
