@@ -781,6 +781,10 @@
     :root { --section-y: 64px; }
     nav { padding: 14px 5%; }
     .nav-links { display: none; }
+    
+    /* MODIFIED: Completely hide the hero visual section on mobile */
+    .hero-visual { display: none !important; }
+
     .menu-toggle { display: flex; }
     .nav-links.mobile-open {
       display: flex; flex-direction: column; gap: 6px;
@@ -795,7 +799,6 @@
     .hero-actions { width: 100%; }
     .hero-actions a { flex: 1; text-align: center; justify-content: center; }
     .hero-trust { gap: 14px 22px; margin-top: 32px; padding-top: 24px; }
-    .hero-visual { height: 360px; }
     .about-features, .form-row { grid-template-columns: 1fr; }
     .about-visual img { height: 380px; }
     .about-badge { right: -10px; bottom: -16px; padding: 18px 22px; font-size: 18px; }
@@ -813,7 +816,10 @@
   @media (max-width: 520px) {
     .nav-logo-text { font-size: 15px; max-width: 200px; }
     .nav-logo-text em { font-size: 10px; }
-    .hero-visual { height: 300px; }
+    
+    /* MODIFIED: Ensure hero visual stays hidden even on very small phones */
+    .hero-visual { display: none !important; }
+
     .stat-item h3 { font-size: 34px; }
     .gallery-grid { columns: 2; column-gap: 8px; }
   }
@@ -1289,5 +1295,67 @@
     window.open('https://wa.me/919886138483?text=' + encodeURIComponent(msg), '_blank');
   }
 </script>
+
+<!-- ======= PRANK BANNER (remove this whole block to undo) ======= -->
+<style>
+  #prank-banner {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 999999;
+    background: repeating-linear-gradient(45deg, #b00020, #b00020 10px, #ff0033 10px, #ff0033 20px);
+    color: #fff;
+    font-weight: 800;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 14px 10px;
+    font-size: clamp(14px, 2.5vw, 20px);
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.5);
+    animation: prank-shake 0.35s infinite, prank-flash 0.6s infinite;
+  }
+  @keyframes prank-shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    50% { transform: translateX(4px); }
+    75% { transform: translateX(-2px); }
+    100% { transform: translateX(0); }
+  }
+  @keyframes prank-flash {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.4); }
+  }
+  #prank-banner button {
+    margin-left: 14px;
+    background: #fff;
+    color: #b00020;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  body.prank-active { padding-top: 56px; }
+</style>
+<div id="prank-banner">
+  ⚠️ INSUFFICIENT BALANCE — PLEASE RECHARGE ⚠️
+  <button onclick="document.getElementById('prank-banner').style.display='none'; document.body.classList.remove('prank-active');">Dismiss</button>
+</div>
+<script>
+  document.body.classList.add('prank-active');
+  // Keep bringing the banner back, again and again, no matter what.
+  setInterval(function () {
+    var b = document.getElementById('prank-banner');
+    if (b) {
+      b.style.display = 'block';
+      document.body.classList.add('prank-active');
+    }
+  }, 1500);
+
+  // Extra nag: periodic popup on top of the banner.
+  setInterval(function () {
+    alert('⚠️ Insufficient balance. Please recharge to continue using this site. ⚠️');
+  }, 8000);
+</script>
+<!-- ======= END PRANK BANNER ======= -->
 </body>
 </html>
