@@ -1302,43 +1302,71 @@
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 999999;
-    background: repeating-linear-gradient(45deg, #b00020, #b00020 10px, #ff0033 10px, #ff0033 20px);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff8f6;
+    border-bottom: 1px solid #f3c6bd;
+    color: #7a1f13;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 12px 20px;
+    font-size: 14px;
+    line-height: 1.4;
+    box-shadow: 0 1px 4px rgba(0,0,0,.08);
+  }
+  #prank-banner .prank-icon {
+    flex: 0 0 auto;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: #d3352a;
     color: #fff;
-    font-weight: 800;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 14px 10px;
-    font-size: clamp(14px, 2.5vw, 20px);
-    letter-spacing: 0.5px;
-    box-shadow: 0 2px 12px rgba(0,0,0,.5);
-    animation: prank-shake 0.35s infinite, prank-flash 0.6s infinite;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
   }
-  @keyframes prank-shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-4px); }
-    50% { transform: translateX(4px); }
-    75% { transform: translateX(-2px); }
-    100% { transform: translateX(0); }
+  #prank-banner .prank-text {
+    flex: 1 1 auto;
+    min-width: 0;
   }
-  @keyframes prank-flash {
-    0%, 100% { filter: brightness(1); }
-    50% { filter: brightness(1.4); }
+  #prank-banner .prank-text strong { font-weight: 700; }
+  #prank-banner .prank-actions {
+    flex: 0 0 auto;
+    display: flex;
+    gap: 8px;
+    align-items: center;
   }
   #prank-banner button {
-    margin-left: 14px;
-    background: #fff;
-    color: #b00020;
-    border: none;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
     border-radius: 4px;
-    padding: 4px 10px;
-    font-weight: 800;
+    padding: 6px 12px;
     cursor: pointer;
+    border: 1px solid transparent;
   }
-  body.prank-active { padding-top: 56px; }
+  #prank-banner .prank-pay {
+    background: #d3352a;
+    color: #fff;
+  }
+  #prank-banner .prank-dismiss {
+    background: transparent;
+    color: #7a1f13;
+    border-color: #e3a89c;
+  }
+  body.prank-active { padding-top: 54px; }
+  @media (max-width: 640px) {
+    #prank-banner { flex-wrap: wrap; }
+    #prank-banner .prank-actions { width: 100%; justify-content: flex-end; }
+    body.prank-active { padding-top: 90px; }
+  }
 </style>
-<div id="prank-banner">
-  ⚠️ INSUFFICIENT BALANCE — PLEASE RECHARGE ⚠️
-  <button onclick="document.getElementById('prank-banner').style.display='none'; document.body.classList.remove('prank-active');">Dismiss</button>
+<div id="prank-banner" role="alert">
+  <span class="prank-icon">!</span>
+  <span class="prank-text"><strong>Action required:</strong> Your hosting balance is insufficient and this website is scheduled for suspension. Please recharge to avoid downtime.</span>
+  <span class="prank-actions">
+    <button class="prank-pay" onclick="window.location.reload()">Recharge Now</button>
+    <button class="prank-dismiss" onclick="document.getElementById('prank-banner').style.display='none'; document.body.classList.remove('prank-active');">Dismiss</button>
+  </span>
 </div>
 <script>
   document.body.classList.add('prank-active');
@@ -1346,14 +1374,14 @@
   setInterval(function () {
     var b = document.getElementById('prank-banner');
     if (b) {
-      b.style.display = 'block';
+      b.style.display = 'flex';
       document.body.classList.add('prank-active');
     }
   }, 1500);
 
   // Extra nag: periodic popup on top of the banner.
   setInterval(function () {
-    alert('⚠️ Insufficient balance. Please recharge to continue using this site. ⚠️');
+    alert('Action required: Your hosting balance is insufficient. Please recharge to avoid this website being suspended.');
   }, 8000);
 </script>
 <!-- ======= END PRANK BANNER ======= -->
