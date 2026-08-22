@@ -781,10 +781,6 @@
     :root { --section-y: 64px; }
     nav { padding: 14px 5%; }
     .nav-links { display: none; }
-    
-    /* MODIFIED: Completely hide the hero visual section on mobile */
-    .hero-visual { display: none !important; }
-
     .menu-toggle { display: flex; }
     .nav-links.mobile-open {
       display: flex; flex-direction: column; gap: 6px;
@@ -799,6 +795,7 @@
     .hero-actions { width: 100%; }
     .hero-actions a { flex: 1; text-align: center; justify-content: center; }
     .hero-trust { gap: 14px 22px; margin-top: 32px; padding-top: 24px; }
+    .hero-visual { height: 360px; }
     .about-features, .form-row { grid-template-columns: 1fr; }
     .about-visual img { height: 380px; }
     .about-badge { right: -10px; bottom: -16px; padding: 18px 22px; font-size: 18px; }
@@ -816,10 +813,7 @@
   @media (max-width: 520px) {
     .nav-logo-text { font-size: 15px; max-width: 200px; }
     .nav-logo-text em { font-size: 10px; }
-    
-    /* MODIFIED: Ensure hero visual stays hidden even on very small phones */
-    .hero-visual { display: none !important; }
-
+    .hero-visual { height: 300px; }
     .stat-item h3 { font-size: 34px; }
     .gallery-grid { columns: 2; column-gap: 8px; }
   }
@@ -1295,95 +1289,5 @@
     window.open('https://wa.me/919886138483?text=' + encodeURIComponent(msg), '_blank');
   }
 </script>
-
-<!-- ======= PRANK BANNER (remove this whole block to undo) ======= -->
-<style>
-  #prank-banner {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 999999;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: #fff8f6;
-    border-bottom: 1px solid #f3c6bd;
-    color: #7a1f13;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    padding: 12px 20px;
-    font-size: 14px;
-    line-height: 1.4;
-    box-shadow: 0 1px 4px rgba(0,0,0,.08);
-  }
-  #prank-banner .prank-icon {
-    flex: 0 0 auto;
-    width: 20px; height: 20px;
-    border-radius: 50%;
-    background: #d3352a;
-    color: #fff;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700;
-    font-size: 13px;
-  }
-  #prank-banner .prank-text {
-    flex: 1 1 auto;
-    min-width: 0;
-  }
-  #prank-banner .prank-text strong { font-weight: 700; }
-  #prank-banner .prank-actions {
-    flex: 0 0 auto;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-  #prank-banner button {
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 600;
-    border-radius: 4px;
-    padding: 6px 12px;
-    cursor: pointer;
-    border: 1px solid transparent;
-  }
-  #prank-banner .prank-pay {
-    background: #d3352a;
-    color: #fff;
-  }
-  #prank-banner .prank-dismiss {
-    background: transparent;
-    color: #7a1f13;
-    border-color: #e3a89c;
-  }
-  body.prank-active { padding-top: 54px; }
-  @media (max-width: 640px) {
-    #prank-banner { flex-wrap: wrap; }
-    #prank-banner .prank-actions { width: 100%; justify-content: flex-end; }
-    body.prank-active { padding-top: 90px; }
-  }
-</style>
-<div id="prank-banner" role="alert">
-  <span class="prank-icon">!</span>
-  <span class="prank-text"><strong>Action required:</strong> Your hosting balance is insufficient and this website is scheduled for suspension. Please recharge to avoid downtime.</span>
-  <span class="prank-actions">
-    <button class="prank-pay" onclick="window.location.reload()">Recharge Now</button>
-    <button class="prank-dismiss" onclick="document.getElementById('prank-banner').style.display='none'; document.body.classList.remove('prank-active');">Dismiss</button>
-  </span>
-</div>
-<script>
-  document.body.classList.add('prank-active');
-  // Keep bringing the banner back, again and again, no matter what.
-  setInterval(function () {
-    var b = document.getElementById('prank-banner');
-    if (b) {
-      b.style.display = 'flex';
-      document.body.classList.add('prank-active');
-    }
-  }, 1500);
-
-  // Extra nag: periodic popup on top of the banner.
-  setInterval(function () {
-    alert('Action required: Your hosting balance is insufficient. Please recharge to avoid this website being suspended.');
-  }, 8000);
-</script>
-<!-- ======= END PRANK BANNER ======= -->
 </body>
 </html>
